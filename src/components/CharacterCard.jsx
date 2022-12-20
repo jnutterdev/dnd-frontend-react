@@ -28,14 +28,12 @@ class CharacterCard extends Component {
         return (
             <div>
             {this.state.characterList.map(character => (
-            <div className="column" key={character.id}>
-            <div className="card">
+            <div className="card" key={character.id}>
               <div className="card-image">
                 <figure className="image is-4by3">
                   <img
                     src={character.character_image || 'http://localhost:8000/media/images/dnd.jpeg'}
-                    width="300"
-                    alt="Placeholder image"
+                    alt={character.name || 'Character image'}
                   />
                 </figure>
               </div>
@@ -44,8 +42,8 @@ class CharacterCard extends Component {
                   <div className="media-left">
                     <figure className="image is-48x48">
                       <img
-                        src="https://bulma.io/images/placeholders/96x96.png"
-                        alt="Placeholder image"
+                        src="http://localhost:8000/media/images/avatar.png"
+                        alt="avatar image"
                       />
                     </figure>
                   </div>
@@ -61,7 +59,6 @@ class CharacterCard extends Component {
                   <time dateTime="{character.created_on}">{format(new Date(Date.parse(character.created_on)), "PPpp")}</time>
                 </div>
               </div>
-            </div>
             </div>
             ))}
         </div>
