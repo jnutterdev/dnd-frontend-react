@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { format } from 'date-fns'
 
 class CharacterCard extends Component {
         state = {
@@ -17,7 +18,6 @@ class CharacterCard extends Component {
             this.setState({
               characterList: response.data
             });
-            console.log(response.data)
           })
           .catch(error => {
             console.log(error);
@@ -28,12 +28,12 @@ class CharacterCard extends Component {
         return (
             <div>
             {this.state.characterList.map(character => (
-            <div className="column">
-            <div className="card" key={character.id}>
+            <div className="column" key={character.id}>
+            <div className="card">
               <div className="card-image">
                 <figure className="image is-4by3">
                   <img
-                    src={character.character_image || 'https://bulma.io/images/placeholders/96x96.png'}
+                    src={character.character_image || 'http://localhost:8000/media/images/dnd.jpeg'}
                     width="300"
                     alt="Placeholder image"
                   />
@@ -58,7 +58,7 @@ class CharacterCard extends Component {
                 <div className="content">
                   <p>Is a level {character.level} {character.char_class}.</p>
                   <br />
-                  <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                  <time dateTime="{character.created_on}">{format(new Date(Date.parse(character.created_on)), "PPpp")}</time>
                 </div>
               </div>
             </div>
